@@ -1,0 +1,21 @@
+[versions]
+http4k = "6.19.0.0"
+logback = "1.5.19"
+slf4j = "2.0.17"
+hoplite = "2.9.0"
+hikari = "6.3.0"
+postgresql = "42.7.5"
+testcontainer = "1.21.3"
+sentry = "8.7.0"
+micrometer = "1.14.6"
+
+[libraries]
+http4-bom = { module = "org.http4k:http4k-bom", version.ref = "http4k"}
+micrometer-bom  ={ module = "io.micrometer:micrometer-bom", version.ref = "micrometer"}
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+holpite-core = { module = "com.sksamuel.hoplite:hoplite-core", version.ref = "hoplite" }
+zaxxer-hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
+postgresql-driver = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+testcontainer-postgres = { module = "org.testcontainers:postgresql", version.ref = "testcontainer" }
+sentry-sentry = { module = "io.sentry:sentry", version.ref = "sentry" }

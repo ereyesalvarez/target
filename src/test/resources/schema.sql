@@ -1,0 +1,1 @@
+-- Definition of the database for the tests
