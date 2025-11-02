@@ -8,6 +8,7 @@ postgresql = "42.7.5"
 testcontainer = "1.21.3"
 sentry = "8.7.0"
 micrometer = "1.14.6"
+jsonwebtoken = "0.13.0"
 
 [libraries]
 http4-bom = { module = "org.http4k:http4k-bom", version.ref = "http4k"}
@@ -19,3 +20,6 @@ zaxxer-hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 postgresql-driver = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 testcontainer-postgres = { module = "org.testcontainers:postgresql", version.ref = "testcontainer" }
 sentry-sentry = { module = "io.sentry:sentry", version.ref = "sentry" }
+jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jsonwebtoken" }
+jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jsonwebtoken" }
+jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jsonwebtoken" }

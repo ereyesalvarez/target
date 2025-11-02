@@ -24,10 +24,9 @@ dependencies {
   implementation(platform(libs.micrometer.bom))
   implementation("io.micrometer:micrometer-registry-prometheus")
 
-  implementation("io.jsonwebtoken:jjwt-api:0.13.0")
-  runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
-  runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.13.0")
-  //   implementation("com.auth0:java-jwt:4.4.0")
+  implementation(libs.jjwt.api)
+  runtimeOnly(libs.jjwt.impl)
+  runtimeOnly(libs.jjwt.jackson)
 
   implementation("org.jdbi:jdbi3-core:3.45.1")
 
