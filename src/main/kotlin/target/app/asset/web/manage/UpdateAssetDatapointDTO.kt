@@ -1,4 +1,4 @@
-package target.app.asset.adapter.web.manage
+package target.app.asset.web.manage
 
 import kotlinx.serialization.Serializable
 import target.infra.serializer.BigDecimalSerializer

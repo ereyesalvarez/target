@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.wait.strategy.Wait
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetDataPoint
-import target.app.asset.model.AssetType
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetDataPoint
+import target.app.asset.domain.model.AssetType
 import target.fixtures.assetA
 import target.fixtures.*
 import target.infra.db.getDatasource

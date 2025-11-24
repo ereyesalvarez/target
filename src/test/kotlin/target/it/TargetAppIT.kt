@@ -16,6 +16,7 @@ import target.infra.auth.LoginResponse
 import target.infra.http.dto.DefaultResponse
 import target.infra.http.dto.ErrorResponse
 import target.infra.properties.definition.AppDBConfig
+import kotlin.test.assertEquals
 
 @Tag("integration")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -58,6 +59,80 @@ class TargetAppIT {
     // Database connection check removed - not needed for auth tests
   }
 
+  @Test
+  fun `E2E test for basic flow`() {
+    val token = loginAndGetToken()
+
+    // 1. Create Asset
+    val createAssetBody = """
+      {
+        "title": "Test Asset",
+        "type": "CASH",
+        "category": "Cash",
+        "currency": "EUR"
+      }
+    """.trimIndent().toRequestBody(json)
+
+    val createAssetRequest = Request.Builder()
+      .url("$baseUrl/v1/assets").post(createAssetBody)
+      .addHeader("Authorization", "Bearer $token")
+      .build()
+
+    client.newCall(createAssetRequest).execute().use { resp ->
+      assertEquals(200, resp.code)
+      val respBody = resp.body?.string().orEmpty()
+      assertTrue(respBody.contains("Asset created successfully"))
+
+      // Verify asset record exists in database
+      val assetExists = jdbi.withHandle<Boolean, Exception> { handle ->
+        handle.createQuery(
+          "SELECT COUNT(*) FROM asset WHERE title = ? AND type_code = ? AND category_code = ? AND currency = ?"
+        )
+          .bind(0, "Test Asset").bind(1, "CASH").bind(2, "Cash").bind(3, "EUR").mapTo(Int::class.java).single() > 0
+      }
+      assertTrue(assetExists, "Asset record should exist in database")
+    }
+
+    // 2. Update Asset Data Points
+    val updateDatapointBody = """
+      {
+        "title": "Test Asset",
+        "dataPoints": [
+          {
+            "date": "2025-09-03",
+            "balance": 1000.50,
+            "gain": 50.25,
+            "contribution": 950.25
+          }
+        ]
+      }
+    """.trimIndent().toRequestBody(json)
+
+    val updateDatapointRequest = Request.Builder().url("$baseUrl/v1/assets/update").put(updateDatapointBody)
+      .addHeader("Authorization", "Bearer $token")
+      .build()
+
+    client.newCall(updateDatapointRequest).execute().use { resp ->
+      assertEquals(200, resp.code)
+      val respBody = resp.body?.string().orEmpty()
+      assertTrue(respBody.contains("Successfully updated assets"))
+
+      // Verify asset data point record exists in database
+      val datapointExists = jdbi.withHandle<Boolean, Exception> { handle ->
+        val assetId = handle.createQuery("SELECT id FROM asset WHERE title = ?")
+          .bind(0, "Test Asset")
+          .mapTo(Int::class.java)
+          .single()
+
+        handle.createQuery("SELECT COUNT(*) FROM asset_datapoint WHERE asset_id = ? AND d = ?")
+          .bind(0, assetId)
+          .bind(1, java.sql.Date.valueOf("2025-09-03"))
+          .mapTo(Int::class.java)
+          .single() == 1
+      }
+      assertTrue(datapointExists, "Asset data point record should exist in database")
+    }
+  }
 
   @Test
   fun `E2E test for successful login with valid credentials`() {

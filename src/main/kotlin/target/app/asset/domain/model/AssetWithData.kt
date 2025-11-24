@@ -1,4 +1,4 @@
-package target.app.asset.model
+package target.app.asset.domain.model
 
 import java.util.Currency
 

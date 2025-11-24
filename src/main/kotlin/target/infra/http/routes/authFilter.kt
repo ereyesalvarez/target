@@ -15,7 +15,7 @@ fun authFilter(jwtService: JwtService): Filter = Filter { next ->
     { request ->
         val authHeader = request.header("Authorization")
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            Response(Status.UNAUTHORIZED).body(Json.encodeToString(ErrorResponse.serializer()))
+            Response(Status.UNAUTHORIZED).body(Json.encodeToString(ErrorResponse.serializer(), ErrorResponse("Unauthorized")))
         } else {
             val token = authHeader.removePrefix("Bearer ").trim()
             try {

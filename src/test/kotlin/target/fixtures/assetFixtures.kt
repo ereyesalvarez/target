@@ -1,9 +1,9 @@
 package target.fixtures
 
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetDataPoint
-import target.app.asset.model.AssetType
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetDataPoint
+import target.app.asset.domain.model.AssetType
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.Currency

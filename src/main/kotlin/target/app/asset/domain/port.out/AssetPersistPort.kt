@@ -1,8 +1,8 @@
-package target.app.asset.port.out
+package target.app.asset.domain.port.out
 
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.model.AssetDataPoint
-import target.app.asset.model.AssetWithData
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.model.AssetDataPoint
+import target.app.asset.domain.model.AssetWithData
 import java.time.LocalDate
 
 interface AssetPersistPort {

@@ -1,8 +1,8 @@
-package target.app.asset.uc
+package target.app.asset.domain.uc
 
 import org.slf4j.LoggerFactory
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.port.out.AssetPersistPort
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.port.out.AssetPersistPort
 
 class CreateAsset(private val assetPersistPort: AssetPersistPort) {
   private val logger = LoggerFactory.getLogger(CreateAsset::class.java)

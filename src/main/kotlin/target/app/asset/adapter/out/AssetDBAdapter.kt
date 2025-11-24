@@ -1,13 +1,13 @@
 package target.app.asset.adapter.out
 
 import org.jdbi.v3.core.Jdbi
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetDataPoint
-import target.app.asset.model.AssetType
-import target.app.asset.model.AssetWithData
-import target.app.asset.port.out.AssetPersistItem
-import target.app.asset.port.out.AssetPersistPort
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetDataPoint
+import target.app.asset.domain.model.AssetType
+import target.app.asset.domain.model.AssetWithData
+import target.app.asset.domain.port.out.AssetPersistItem
+import target.app.asset.domain.port.out.AssetPersistPort
 import java.time.LocalDate
 import java.util.Currency
 

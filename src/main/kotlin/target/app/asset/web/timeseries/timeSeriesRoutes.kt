@@ -1,7 +1,7 @@
-package target.app.asset.adapter.web.timeseries
+package target.app.asset.web.timeseries
 
-import target.app.asset.adapter.web.history.AssetTimeSeriesDTO
-import target.app.asset.adapter.web.history.TimeSeriesDTO
+import target.app.asset.web.history.AssetTimeSeriesDTO
+import target.app.asset.web.history.TimeSeriesDTO
 import org.http4k.core.Method.GET
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.OK
@@ -9,8 +9,8 @@ import org.http4k.core.with
 import org.http4k.format.KotlinxSerialization
 import org.http4k.routing.bind
 import org.http4k.routing.routes
-import target.app.asset.model.AssetWithData
-import target.app.asset.uc.TimeSeriesUC
+import target.app.asset.domain.model.AssetWithData
+import target.app.asset.domain.uc.TimeSeriesUC
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

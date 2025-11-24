@@ -1,7 +1,7 @@
-package target.app.asset.command
+package target.app.asset.domain.command
 
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetType
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetType
 import java.util.Currency
 
 data class CreateAssetCommand(

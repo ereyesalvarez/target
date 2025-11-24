@@ -9,10 +9,11 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import target.app.asset.command.CreateAssetCommand
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetType
-import target.app.asset.port.out.AssetPersistPort
+import target.app.asset.domain.command.CreateAssetCommand
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetType
+import target.app.asset.domain.port.out.AssetPersistPort
+import target.app.asset.domain.uc.CreateAsset
 import java.util.Currency
 
 class CreateAssetTest {

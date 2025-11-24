@@ -1,7 +1,7 @@
-package target.app.asset.port.out
+package target.app.asset.domain.port.out
 
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetType
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetType
 import java.util.Currency
 
 data class AssetPersistItem(

@@ -1,4 +1,4 @@
-package target.app.asset.adapter.web.history
+package target.app.asset.web.history
 
 import kotlinx.serialization.Serializable
 

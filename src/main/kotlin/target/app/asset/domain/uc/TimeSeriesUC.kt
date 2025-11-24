@@ -1,7 +1,7 @@
-package target.app.asset.uc
+package target.app.asset.domain.uc
 
-import target.app.asset.model.AssetWithData
-import target.app.asset.port.out.AssetPersistPort
+import target.app.asset.domain.model.AssetWithData
+import target.app.asset.domain.port.out.AssetPersistPort
 import java.time.LocalDateTime
 
 /**

@@ -1,7 +1,7 @@
-package target.app.asset.uc
+package target.app.asset.domain.uc
 
-import target.app.asset.command.UpsertDatapointCommand
-import target.app.asset.port.out.AssetPersistPort
+import target.app.asset.domain.command.UpsertDatapointCommand
+import target.app.asset.domain.port.out.AssetPersistPort
 
 class UpsertAssetDatapoint(private val assetPersistPort: AssetPersistPort){
 

@@ -1,8 +1,8 @@
-package target.app.asset.adapter.web.manage
+package target.app.asset.web.manage
 
 import kotlinx.serialization.Serializable
-import target.app.asset.model.AssetCategory
-import target.app.asset.model.AssetType
+import target.app.asset.domain.model.AssetCategory
+import target.app.asset.domain.model.AssetType
 
 @Serializable
 data class CreateAssetDTO(

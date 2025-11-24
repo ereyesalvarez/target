@@ -1,4 +1,4 @@
-package target.app.asset.model
+package target.app.asset.domain.model
 
 enum class AssetType(val code: String, val typeGroup: String) {
   CASH("cash", "cash"),

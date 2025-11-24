@@ -25,14 +25,17 @@ import target.infra.http.routes.userIdKey
 fun createRoutes(
   meterRegistry: PrometheusMeterRegistry,
   jwtService: JwtService,
-
+  authenticatedRoutes: RoutingHttpHandler,
   enableGlobalPermissions: Boolean = true): HttpHandler {
   val handler:HttpHandler =  exceptionHandler.then(
     routes(
       appUtilsRoutes(meterRegistry),
       loginRoute(jwtService),
       authFilter(jwtService).then(
-        authenticatedUserRoutes()
+        routes(
+        authenticatedUserRoutes(),
+        authenticatedRoutes
+        )
       )
     )
   )

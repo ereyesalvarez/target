@@ -1,4 +1,4 @@
-package target.app.asset.adapter.web.manage
+package target.app.asset.web.manage
 
 import org.http4k.core.Method.PUT
 import org.http4k.core.Response
@@ -7,15 +7,15 @@ import org.http4k.core.with
 import org.http4k.format.KotlinxSerialization
 import org.http4k.routing.bind
 import org.http4k.routing.routes
-import target.app.asset.command.UpsertDatapointCommand
-import target.app.asset.model.AssetDataPoint
-import target.app.asset.uc.UpsertAssetDatapoint
+import target.app.asset.domain.command.UpsertDatapointCommand
+import target.app.asset.domain.model.AssetDataPoint
+import target.app.asset.domain.uc.UpsertAssetDatapoint
 import target.infra.http.dto.DefaultResponse
+import target.infra.serializer.http4Json
 import java.time.LocalDate
 
-private val json = KotlinxSerialization
-private val defaultResponseLens = json.autoBody<DefaultResponse>().toLens()
-private val requestLens = json.autoBody<UpdateAssetDatapointDTO>().toLens()
+private val defaultResponseLens = http4Json.autoBody<DefaultResponse>().toLens()
+private val requestLens = http4Json.autoBody<UpdateAssetDatapointDTO>().toLens()
 
 fun assetDatapointRoutes(assetUpdateUC: UpsertAssetDatapoint) = routes(
   "/v1/assets/update" bind PUT to { request ->
