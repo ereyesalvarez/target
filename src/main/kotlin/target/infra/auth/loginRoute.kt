@@ -5,11 +5,17 @@ import kotlinx.serialization.json.Json
 import org.http4k.core.Method
 import org.http4k.core.Response
 import org.http4k.core.Status
+import org.http4k.core.then
 import org.http4k.routing.RoutingHttpHandler
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.slf4j.LoggerFactory
+import target.app.common.Validatable
+import target.app.common.Validators
 import target.infra.http.dto.ErrorResponse
+import target.infra.ratelimit.RateLimiter
+import target.infra.ratelimit.RateLimiters
+import target.infra.ratelimit.rateLimitFilter
 
 private val log = LoggerFactory.getLogger("loginRoute")
 
@@ -22,7 +28,12 @@ private val defaultRoles = listOf("ADMIN")
 data class LoginRequest(
   val username: String,
   val password: String
-)
+) : Validatable {
+  override fun validate() {
+    Validators.requireNotBlank(username, "username")
+    Validators.requireNotBlank(password, "password")
+  }
+}
 
 @Serializable
 data class LoginResponse(
@@ -30,12 +41,16 @@ data class LoginResponse(
 )
 
 @Suppress("TooGenericExceptionCaught")
-fun loginRoute(jwtService: JwtService): RoutingHttpHandler {
-  return routes(
+fun loginRoute(
+  jwtService: JwtService,
+  rateLimiter: RateLimiter = RateLimiters.authenticationLimiter()
+): RoutingHttpHandler {
+  val loginHandler = routes(
     "/login" bind Method.POST to { request ->
       try {
         val body = request.bodyString()
         val loginRequest = Json.decodeFromString(LoginRequest.serializer(), body)
+        loginRequest.validate()
 
         if (loginRequest.username == mvpUsername && loginRequest.password == mvpPassword) {
           val token = jwtService.createToken(
@@ -67,4 +82,7 @@ fun loginRoute(jwtService: JwtService): RoutingHttpHandler {
       }
     }
   )
+
+  // Apply rate limiting to login endpoint (5 requests per minute)
+  return rateLimitFilter(rateLimiter).then(loginHandler)
 }

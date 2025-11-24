@@ -20,6 +20,7 @@ private val requestLens = http4Json.autoBody<UpdateAssetDatapointDTO>().toLens()
 fun assetDatapointRoutes(assetUpdateUC: UpsertAssetDatapoint) = routes(
   "/v1/assets/update" bind PUT to { request ->
     val input = requestLens(request)
+    input.validate()
 
     val items = input.let {
        it.dataPoints.map { datapoint ->

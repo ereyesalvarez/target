@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import target.infra.http.dto.ErrorResponse
+import target.infra.ratelimit.RateLimiters
 
 class LoginRouteTest {
 
@@ -17,7 +18,9 @@ class LoginRouteTest {
   @BeforeEach
   fun setup() {
     jwtService = JwtService(issuer = "test-app")
-    route = loginRoute(jwtService)
+    // Use permissive rate limiter for testing
+    val testRateLimiter = RateLimiters.developmentLimiter()
+    route = loginRoute(jwtService, testRateLimiter)
     // Reset credentials for each test
     mvpUsername = "admin"
     mvpPassword = "admin123"

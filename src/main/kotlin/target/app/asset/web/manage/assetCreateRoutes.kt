@@ -18,7 +18,9 @@ private val requestLens = http4Json.autoBody<CreateAssetDTO>().toLens()
 
 fun assetCreateRoutes(createAsset: CreateAsset) = routes(
   "/v1/assets" bind Method.POST to { request ->
-    val command = requestLens(request).toDomain()
+    val dto = requestLens(request)
+    dto.validate()
+    val command = dto.toDomain()
     try {
       createAsset.execute(command)
       Response(OK).with(defaultResponseLens of DefaultResponse("Asset created successfully"))

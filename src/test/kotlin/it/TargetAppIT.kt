@@ -1,4 +1,4 @@
-package target.it
+package it
 
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -16,6 +16,7 @@ import target.infra.auth.LoginResponse
 import target.infra.http.dto.DefaultResponse
 import target.infra.http.dto.ErrorResponse
 import target.infra.properties.definition.AppDBConfig
+import java.sql.Date
 import kotlin.test.assertEquals
 
 @Tag("integration")
@@ -126,7 +127,7 @@ class TargetAppIT {
 
         handle.createQuery("SELECT COUNT(*) FROM asset_datapoint WHERE asset_id = ? AND d = ?")
           .bind(0, assetId)
-          .bind(1, java.sql.Date.valueOf("2025-09-03"))
+          .bind(1, Date.valueOf("2025-09-03"))
           .mapTo(Int::class.java)
           .single() == 1
       }
